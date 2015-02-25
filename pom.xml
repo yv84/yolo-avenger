@@ -10,16 +10,18 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <glassfish.home>/home/yv84/app/java/ee/glassfish</glassfish.home>
-        <glassfish.user>admin</glassfish.user>
-        <glassfish.domain>domain1</glassfish.domain>
-        <glassfish.passfile>
-            /home/yv84/app/java/ee/glassfish/domains/domain1/master-password
-        </glassfish.passfile>
-        <glassfish.httpPort>8080</glassfish.httpPort>
-        <glassfish.adminPort>4848</glassfish.adminPort>
+    <!-- glassfish -->
+    <glassfish.home>${env.glassfishdir}</glassfish.home>
+    <glassfish.user>admin</glassfish.user>
+    <glassfish.domain>${env.glassfishdomain}</glassfish.domain>
+    <glassfish.passfile>
+        ${glassfish.home}/domains/${glassfish.domain}/master-password
+    </glassfish.passfile>
+    <glassfish.httpPort>8080</glassfish.httpPort>
+    <glassfish.adminPort>4848</glassfish.adminPort>
 
   </properties>
+
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -28,6 +30,7 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
   <build>
     <finalName>helloworldws</finalName>
     <plugins>
