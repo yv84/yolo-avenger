@@ -16,7 +16,7 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class SOAPClientSAAJ {
+public class SOAPClientSAAJ2 {
 
     public static void main(String args[]) throws Exception {
         // Create SOAP Connection
@@ -29,19 +29,19 @@ public class SOAPClientSAAJ {
 
         // print SOAP Response
         System.out.print("Response SOAP Message:");
+
         /*
         Response SOAP Message:
         <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
             <SOAP-ENV:Header/>
             <S:Body>
-                <ns2:getListResponse xmlns:ns2="http://helloworldws.yv84.me/">
-                    <return>Table 1</return>
-                    <return>Table 2</return>
-                    <return>Table 3</return>
-                </ns2:getListResponse>
+                <ns2:getEchoResponse xmlns:ns2="http://helloworldws.yv84.me/">
+                    <return>qwe</return>
+                </ns2:getEchoResponse>
             </S:Body>
         </S:Envelope>
          */
+
         soapResponse.writeTo(System.out);
         soapConnection.close();
 
@@ -61,7 +61,7 @@ public class SOAPClientSAAJ {
 
             }
         }
-        System.out.println("\nList: " + helloWorldMessages);
+        System.out.println("\nResponse: " + helloWorldMessages.get(0));
 
     }
 
@@ -81,17 +81,21 @@ public class SOAPClientSAAJ {
         <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
             <SOAP-ENV:Header/>
             <S:Body>
-                <ns2:getList xmlns:ns2="http://helloworldws.yv84.me/"/>
+                <ns2:getEcho xmlns:ns2="http://helloworldws.yv84.me/">
+                    <arg0>qwe</arg0>
+                </ns2:getEcho>
             </S:Body>
         </S:Envelope>
          */
 
         // SOAP Body
         SOAPBody soapBody = envelope.getBody();
-        SOAPElement soapBodyElem = soapBody.addChildElement("getList", "ns2");
+        SOAPElement soapOperation = soapBody.addChildElement("getEcho", "ns2");
+        SOAPElement soapArgsElem = soapOperation.addChildElement("arg0");
+        soapArgsElem.addTextNode("Hello request!");
 
         MimeHeaders headers = soapMessage.getMimeHeaders();
-        headers.addHeader("SOAPAction", serverURI  + "bar");
+        headers.addHeader("SOAPAction", serverURI + "bar");
 
         soapMessage.saveChanges();
 

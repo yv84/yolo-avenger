@@ -20,4 +20,9 @@ public class HelloWorldWebService {
         return l;
     }
 
+    @WebMethod(operationName="getEcho")
+    public String getEcho(String param) {
+        return param;
+    }
+
 }

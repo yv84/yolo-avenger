@@ -15,3 +15,6 @@ URL = 'http://127.0.0.1:8080/helloworldws/bar?WSDL'
 client = Client(URL)
 result = client.service.getList()
 assert(result == ["Table 1", "Table 2", "Table 3"])
+
+result = client.service.getEcho("1234")
+assert(result == "1234")
